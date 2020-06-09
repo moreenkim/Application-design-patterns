@@ -6,6 +6,11 @@ const fetchData = async (searchTerm) =>{
             //i:'tt0848228' //gets ID of the movie
         }
     });
+
+    if(response.data.Error){
+        return[];
+    }
+    
     return response.data.Search;
 };
 
