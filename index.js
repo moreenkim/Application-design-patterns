@@ -1,18 +1,3 @@
-const fetchData = async (searchTerm) =>{
-    const response  = await axios.get('http://www.omdbapi.com/', {
-        params: {
-            apikey: '381d0a8a',
-            s:searchTerm // string of movie we search
-            //i:'tt0848228' //gets ID of the movie
-        }
-    });
-
-    if(response.data.Error){
-        return[];
-    }
-    return response.data.Search;
-};
-
 createAutoComplete({
     root:document.querySelector('.autocomplete'),
     renderOption (movie) {
@@ -27,6 +12,20 @@ createAutoComplete({
     },
     inputValue(movie){
         return movie.Title;
+    },
+    async fetchData(searchTerm) {
+        const response  = await axios.get('http://www.omdbapi.com/', {
+            params: {
+                apikey: '381d0a8a',
+                s:searchTerm // string of movie we search
+                //i:'tt0848228' //gets ID of the movie
+            }
+        });
+    
+        if(response.data.Error){
+            return[];
+        }
+        return response.data.Search;
     }
 });
 
