@@ -18,7 +18,7 @@ root.innerHTML = `
 <label><b>Search for Movie</b></label>
 <input class="input" />
 <div class="dropdown">
- <div class="dorpdown-menu">
+ <div class="dropdown-menu">
   <div class="dropdown-content results">
   </div>
  </div>
@@ -47,9 +47,11 @@ const onInput = async event => {
         <img src="${imgSrc}" />
         ${movie.Title}
         `;
+        
         option.addEventListener('click', () =>{
             dropdown.classList.remove('is-active');
-            input.value = movie.Title
+            input.value = movie.Title;
+            onMovieSelect(movie);
         });
 
         resultWrapper.appendChild(option);
@@ -63,3 +65,13 @@ document.addEventListener('click', event => {
        dropdown.classList.remove('is-active')
    }
 });
+
+onMovieSelect = async (movie) => {
+ const response = await axios.get('http://www.omdbapi.com/', {
+    params: {
+        apikey: '381d0a8a',
+        i:movie.imdbID
+    }
+    });
+    Console.log(response.data)
+};
