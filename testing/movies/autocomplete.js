@@ -3,7 +3,7 @@ const createAutoComplete = ({
   renderOption,
   onOptionSelect,
   inputValue,
-  fetchData
+  fetchData,
 }) => {
   root.innerHTML = `
     <label><b>Search</b></label>
@@ -19,7 +19,7 @@ const createAutoComplete = ({
   const dropdown = root.querySelector('.dropdown');
   const resultsWrapper = root.querySelector('.results');
 
-  const onInput = async event => {
+  const onInput = async (event) => {
     const items = await fetchData(event.target.value);
 
     if (!items.length) {
@@ -45,7 +45,7 @@ const createAutoComplete = ({
   };
   input.addEventListener('input', debounce(onInput, 500));
 
-  document.addEventListener('click', event => {
+  document.addEventListener('click', (event) => {
     if (!root.contains(event.target)) {
       dropdown.classList.remove('is-active');
     }
