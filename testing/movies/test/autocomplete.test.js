@@ -49,3 +49,15 @@ it('after searching dropdown opens', async () => {
 
   expect(dropdown.className).to.include('is-active');
 });
+
+it('after  search display results', async () => {
+  const input = document.querySelector('input');
+  InputDeviceInfo.value = 'avengers';
+  input.dispatchEvent(new Event('input'));
+
+  await waitFor('.dropdown-item');
+
+  const items = document.querySelectorAll('.dropdown-item');
+
+  expect(items.length).to.equal(3);
+});
